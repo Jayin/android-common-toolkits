@@ -10,5 +10,5 @@ public interface Tookit {
 
 	String AUTHOR = "chenyoca@gmail.com";
 	
-	String VERSION = "1.6.0";
+	String VERSION = "1.6.1";
 }

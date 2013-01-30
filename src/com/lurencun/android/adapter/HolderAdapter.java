@@ -31,15 +31,15 @@ public class HolderAdapter<T> extends AbstractAdapter<T> {
 		// Holder View模式实现
 		if (convertView == null) {
 			ViewHolder holder = new ViewHolder();
-			convertView = mCreator.createView(mInflater, position,getItem(position));
+			convertView = creator.createView(layoutInflater, position,getItem(position));
 			holder.view = convertView;
 			convertView.setTag(holder);
 		} else {
 			ViewHolder holder = (ViewHolder) convertView.getTag();
 			//释放当前的View的数据
-			mCreator.releaseView(convertView,  getItem(position));
+			creator.releaseView(convertView,  getItem(position));
 			//将新数据更新到HodlerView中
-			mCreator.updateView(holder.view, position, getItem(position));
+			creator.updateView(holder.view, position, getItem(position));
 		}
 		return convertView;
 	}

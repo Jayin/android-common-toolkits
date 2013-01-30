@@ -19,7 +19,7 @@ public class SimpleAdapter<T> extends AbstractAdapter<T> {
 	@Override
 	public View getView(int pos, View convertView, ViewGroup parent) {
 		if(null == convertView){
-			convertView=  mCreator.createView(mInflater, pos, mDataCache.get(pos));
+			convertView=  creator.createView(layoutInflater, pos, dataSetReference.get(pos));
 		}
 		return convertView;
 	}

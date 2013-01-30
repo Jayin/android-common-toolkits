@@ -52,21 +52,6 @@ public class HolderViewFiller<T> {
 		}
 	}
 
-	/**
-	 * </br><b>title : </b> 添加数据 
-	 * </br><b>description :</b>添加数据 
-	 * </br><b>time :</b> 2012-7-18 下午8:16:55
-	 * 
-	 * @param view
-	 * @param item
-	 */
-	public void add(AbsListView view, T item) {
-		HolderAdapter<T> holderAdapter = exportAdapter(view);
-		if (null != holderAdapter) {
-			holderAdapter.add(item);
-		}
-	}
-
 	@SuppressWarnings("unchecked")
 	public HolderAdapter<T> exportAdapter(AbsListView view) {
 		ListAdapter adapter = view.getAdapter();

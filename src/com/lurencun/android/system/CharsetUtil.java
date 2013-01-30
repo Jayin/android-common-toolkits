@@ -1,6 +1,7 @@
 package com.lurencun.android.system;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -81,6 +82,7 @@ public class CharsetUtil {
 	 * @return
 	 */
 	public static String ToDBC(String input) {
+		if(input == null) return null;
 		char[] c = input.toCharArray();
 		for (int i = 0; i < c.length; i++) {
 			if (c[i] == 12288) {
@@ -99,22 +101,24 @@ public class CharsetUtil {
 	 * @param str
 	 * @return
 	 */
-	public static String stringFilter(String str) {
-		str = str.replaceAll("【", "[").replaceAll("】", "]")
+	public static String stringFilter(String input) {
+		if(input == null) return null;
+		input = input.replaceAll("【", "[").replaceAll("】", "]")
 				.replaceAll("！", "!").replaceAll("：", ":");// 替换中文标号
 		String regEx = "[『』]"; // 清除掉特殊字符
 		Pattern p = Pattern.compile(regEx);
-		Matcher m = p.matcher(str);
+		Matcher m = p.matcher(input);
 		return m.replaceAll("").trim();
 	}
 	
 	/**
 	 * 首字母大字
-	 * @param str
+	 * @param input
 	 * @return
 	 */
-	public static String firstCharUpper(String str){
-		String firstChar = str.substring(0, 1).toUpperCase();
-		return firstChar + str.subSequence(1, str.length());
+	public static String firstCharUpper(String input){
+		if(input == null) return null;
+		String firstChar = input.substring(0, 1).toUpperCase(Locale.getDefault());
+		return firstChar + input.subSequence(1, input.length());
 	}
 }

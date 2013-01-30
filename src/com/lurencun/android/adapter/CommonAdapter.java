@@ -18,12 +18,12 @@ public class CommonAdapter<T> extends AbstractAdapter<T> {
 	}
 
 	@Override
-	public View getView(int pos, View convertView, ViewGroup parent) {
-		T data = mDataCache.get(pos);
+	public View getView(int position, View convertView, ViewGroup parent) {
+		T data = dataSetReference.get(position);
 		if(null == convertView){
-			convertView = mCreator.createView(mInflater, pos, data);
+			convertView = creator.createView(layoutInflater, position, data);
 		}else{
-			mCreator.updateView(convertView, pos, data);
+			creator.updateView(convertView, position, data);
 		}
 		return convertView;
 	}
