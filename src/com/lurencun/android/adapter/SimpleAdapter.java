@@ -5,10 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
+ * @author : 桥下一粒砂 chenyoca@gmail.com
  * @date   : 2012-12-3
- * @desc   : 显示多少个，创建多少个。
+ * 显示多少个，创建多少个。
  */
 public class SimpleAdapter<T> extends AbstractAdapter<T> {
 
