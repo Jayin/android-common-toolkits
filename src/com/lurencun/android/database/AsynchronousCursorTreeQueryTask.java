@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.widget.CursorTreeAdapter;
 
 /**
- *
  * @author 桥下一粒砂 (chenyoca@gmail.com)
  * date   2013-4-7
  */

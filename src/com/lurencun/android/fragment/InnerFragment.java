@@ -47,7 +47,7 @@ public abstract class InnerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		if(layoutResourceId == INVALID_LAYOUT_ID) {
-			throw new IllegalArgumentException(String.format("## %s ==> Illegal LayoutResourceId !", this.getClass().getSimpleName()));
+			throw new IllegalArgumentException(String.format(":::::: %s ==> Illegal LayoutResourceId ! ::::::", this.getClass().getSimpleName()));
 		}
 		contentView = inflater.inflate(layoutResourceId, null);
 		return contentView;

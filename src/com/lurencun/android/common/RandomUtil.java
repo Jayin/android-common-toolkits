@@ -11,7 +11,7 @@ import java.util.Random;
 public class RandomUtil {
 	
 	public static String rand(int length) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int t = 1; t < length; t++) {
             long time = System.currentTimeMillis() + t;
             if (time % 3 == 0) {

@@ -6,38 +6,37 @@ import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-9-13
- * @desc   : 抽象Adapter类
- * @param <T>
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date   : 2012-9-13
+ * 抽象Adapter类
  */
 public abstract class AbstractAdapter<T> extends BaseAdapter {
 
 	protected List<T> dataSetReference;
 	protected LayoutInflater layoutInflater;
-	protected ViewCreator<T> creator;
+	protected ViewBuilderDelegate<T> viewBuilderDelegate;
 	
 	/**
-	 * </br><b>description : </b>	创建Adapter，需要给定View创建接口。
-	 * @param inflater
-	 * @param creator
+	 * 创建Adapter，需要给定View创建接口。
+	 * @param inflater LayoutInflater，{@link ViewBuilderDelegate}动态载入XML视图布局时，使用此引用。
+	 * @param delegate Adapter Cell视图的构建过程，由此接口实现。
 	 */
-	public AbstractAdapter(LayoutInflater inflater,ViewCreator<T> creator){
+	public AbstractAdapter(LayoutInflater inflater,ViewBuilderDelegate<T> delegate){
 		this.layoutInflater = inflater;
-		this.creator = creator;
+		this.viewBuilderDelegate = delegate;
 	}
 
 	/**
-	 * </br><b>title : </b>		更新数据集
-	 * </br><b>description :</b>更新数据集
-	 * </br><b>time :</b>		2012-7-10 下午11:06:40
-	 * @param data
+	 * 更新Adapter的数据集。
+	 * @param data 数据集
 	 */
 	public void update(List<T> data){
 		dataSetReference = data;
 	}
-	
+
+	/**
+	 * 清空Adapter的数据集
+	 */
 	public void clear(){
 		if(dataSetReference != null){
 			dataSetReference.clear();
@@ -58,10 +57,10 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
 		notifyDataSetInvalidated();
 	}
 	
+
 	/**
-	 * <b>description :</b>添加数据集，向数据缓存中添加多个元素。
-	 * </br><b>time :</b>		2012-7-17 下午10:19:45
-	 * @param set
+	 * 添加数据集，向数据缓存中添加多个元素。
+	 * @param set 元素集
 	 */
 	public void add(List<T> set){
 	    if( null == dataSetReference ){
@@ -69,7 +68,11 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
 	    }
 	    dataSetReference.addAll(set);
 	}
-	
+
+	/**
+	 * 删除数据集中指定位置的数据。
+	 * @param position 要删除的数据在数据集中的位置
+	 */
 	public void remove(int position){
 		if(dataSetReference == null) return;
 		dataSetReference.remove(position);

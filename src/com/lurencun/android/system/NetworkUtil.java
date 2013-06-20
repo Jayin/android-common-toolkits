@@ -6,18 +6,17 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-11-1
- * @desc   : 网络工具类
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date   : 2012-11-1
+ * 网络工具类
  */
 public class NetworkUtil {
 
 	/**
 	 * 返回网络是否可用。需要权限：
 	 * <p><b> < uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> </b></p>
-	 * @param context
-	 * @return
+	 * @param context 上下文
+	 * @return 网络可用则返回true，否则返回false
 	 */
 	public static boolean isAvailable(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -27,19 +26,19 @@ public class NetworkUtil {
 	
 	/**
 	 * 返回Wifi是否启用
-	 * @param c
-	 * @return
+	 * @param context 上下文
+	 * @return Wifi网络可用则返回true，否则返回false
 	 */
-	public static boolean isWIFIActivate(Context c) {
-		return ((WifiManager) c.getSystemService(Context.WIFI_SERVICE)).isWifiEnabled();
+	public static boolean isWIFIActivate(Context context) {
+		return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE)).isWifiEnabled();
 	}
 	
 	/**
 	 * 修改Wifi状态
-	 * @param c
-	 * @param status
+	 * @param context 上下文
+	 * @param status true为开启Wifi，false为关闭Wifi
 	 */
-	public static void changeWIFIStatus(Context c, boolean status) {
-		((WifiManager) c.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(status);
+	public static void changeWIFIStatus(Context context, boolean status) {
+		((WifiManager) context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(status);
 	}
 }

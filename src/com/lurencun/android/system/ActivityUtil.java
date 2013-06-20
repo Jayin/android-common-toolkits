@@ -15,17 +15,16 @@ import android.widget.Toast;
 import com.lurencun.android.common.Params;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-11-13
- * @desc   : Activity帮助器类
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-11-13
+ * Activity帮助器类
  */
 public final class ActivityUtil {
 
 	/**
-	 * </br><b>description :</b>设置Activity全屏显示。
-	 * @param activity 			Activity引用
-	 * @param isFull 			true为全屏，false为非全屏
+	 * 切换全屏状态。
+	 * @param activity Activity
+	 * @param isFull 设置为true则全屏，否则非全屏
 	 */
 	public static void toggleFullScreen(Activity activity,boolean isFull){
 		hideTitleBar(activity);
@@ -44,8 +43,7 @@ public final class ActivityUtil {
 	
 	/**
 	 * 设置为全屏
-	 * @param activity
-	 * @param isFull
+	 * @param activity Activity
 	 */
 	public static void setFullScreen(Activity activity){
 		toggleFullScreen(activity,true);
@@ -53,8 +51,8 @@ public final class ActivityUtil {
 	
 	/**
 	 * 获取系统状态栏高度
-	 * @param activity
-	 * @return
+	 * @param activity Activity
+	 * @return 状态栏高度
 	 *
 	 */
 	public static int getStatusBarHeight(Activity activity){
@@ -63,8 +61,7 @@ public final class ActivityUtil {
 			Object object = clazz.newInstance();
 			Field field = clazz.getField("status_bar_height");
 		    int dpHeight = Integer.parseInt(field.get(object).toString());
-		    int pxHeight = activity.getResources().getDimensionPixelSize(dpHeight);
-		    return pxHeight;
+		    return activity.getResources().getDimensionPixelSize(dpHeight);
 		} catch (Exception e1) {
 		    e1.printStackTrace();
 		    return 0;
@@ -73,7 +70,7 @@ public final class ActivityUtil {
 	
 	/**
 	 * 隐藏Activity的系统默认标题栏
-	 * @param activity
+	 * @param activity Activity
 	 */
 	public static void hideTitleBar(Activity activity){
 		activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -81,15 +78,15 @@ public final class ActivityUtil {
 	
 	/**
 	 * 强制设置Actiity的显示方向为垂直方向。
-	 * @param activity
+	 * @param activity Activity
 	 */
 	public static void setScreenVertical(Activity activity){
 		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 	
 	/**
-	 * 强制设置Actiity的显示方向为横向。
-	 * @param activity
+	 * 强制设置Activity的显示方向为横向。
+	 * @param activity Activity
 	 */
 	public static void setScreenHorizontal(Activity activity){
 		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -97,26 +94,26 @@ public final class ActivityUtil {
 	
 	/**
 	 * 隐藏软件输入法
-	 * @param activity
+	 * @param activity Activity
 	 */
 	public static void hideSoftInput(Activity activity){
 	    activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 	}
 	
 	/**
-	 * 关闭已经显示的输入法窗口
-	 * @param c
+	 * 关闭已经显示的输入法窗口。
+	 * @param context 上下文对象，一般为Activity
 	 * @param focusingView 输入法所在焦点的View
 	 *
 	 */
-	public static void closeSoftInput(Context c,View focusingView){
-		InputMethodManager imm = (InputMethodManager)c.getSystemService(Context.INPUT_METHOD_SERVICE); 
+	public static void closeSoftInput(Context context,View focusingView){
+		InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(focusingView.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
 	}
 	
 	/**
 	 * 使UI适配输入法
-	 * @param activity
+	 * @param activity Activity
 	 */
 	public static void adjustSoftInput(Activity activity) {
 		activity.getWindow().setSoftInputMode(
@@ -125,8 +122,8 @@ public final class ActivityUtil {
 	
 	/**
 	 * 跳转到某个Activity
-	 * @param activity
-	 * @param targetActivity
+	 * @param activity 当前Activity
+	 * @param targetActivity 目标Activity
 	 */
 	public static void switchTo(Activity activity,Class<? extends Activity> targetActivity){
 		switchTo(activity, new Intent(activity,targetActivity));
@@ -134,8 +131,8 @@ public final class ActivityUtil {
 	
 	/**
 	 * 根据给定的Intent进行Activity跳转
-	 * @param activity
-	 * @param intent
+	 * @param activity 当前Activity
+	 * @param intent 目标Activity的Intent
 	 */
 	public static void switchTo(Activity activity,Intent intent){
 		activity.startActivity(intent);
@@ -144,9 +141,9 @@ public final class ActivityUtil {
 	
 	/**
 	 * 带参数进行Activity跳转
-	 * @param activity
-	 * @param targetActivity
-	 * @param params
+	 * @param activity 当前Activity
+	 * @param target 目标Activity
+	 * @param params 参数
 	 */
 	public static void switchTo(Activity activity,Class<? extends Activity> target,Params params){
 		Intent intent = new Intent(activity,target);
@@ -160,10 +157,10 @@ public final class ActivityUtil {
 	
 	/**
 	 * 带参数和返回请求进行Activity跳转
-	 * @param activity
-	 * @param targetActivity
-	 * @param params
-	 * @param requestCode
+	 * @param activity 当前Activity
+	 * @param targetActivity 目标Activity
+	 * @param params 参数
+	 * @param requestCode Activity请求码
 	 */
 	public static void switchTo(Activity activity,Class<? extends Activity> targetActivity,Params params, int requestCode){
 		Intent intent = new Intent(activity,targetActivity);
@@ -177,16 +174,14 @@ public final class ActivityUtil {
 	
 	/**
 	 * 带返回请求进行Activity跳转
-	 * @param activity
-	 * @param targetActivity
-	 * @param requestCode
+	 * @param activity 当前Activity
+	 * @param targetActivity 目标Activity
+	 * @param requestCode Activity请求码
 	 */
 	public static void switchTo(Activity activity,Class<? extends Activity> targetActivity,int requestCode){
 		Intent intent = new Intent(activity,targetActivity);
 		activity.startActivityForResult(intent, requestCode);
 	}
-	
-	
 	
 	public interface MessageFilter{
 		String filter(String msg);
@@ -194,9 +189,9 @@ public final class ActivityUtil {
 	public static MessageFilter msgFilter;
 	
 	/**
-	 * 显示Toast消息，并保证运行在UI线程中
-	 * @param activity
-	 * @param message
+	 * 短时间显示Toast消息，并保证运行在UI线程中
+	 * @param activity Activity
+	 * @param message 消息内容
 	 */
 	public static void show(final Activity activity,final String message){
 		final String msg = msgFilter != null ? msgFilter.filter(message) : message;
@@ -209,8 +204,8 @@ public final class ActivityUtil {
 	
 	/**
 	 * 长时间显示Toast消息，并保证运行在UI线程中
-	 * @param activity
-	 * @param message
+	 * @param activity Activity
+	 * @param message 消息内容
 	 */
 	public static void showL(final Activity activity,final String message){
 		final String msg = msgFilter != null ? msgFilter.filter(message) : message;
@@ -222,19 +217,28 @@ public final class ActivityUtil {
 	}
 	
 	/**
-	 * 显示Toast消息
-	 * @param activity
-	 * @param message
+	 * 以较短时间显示Toast消息
+	 * @param activity Activity
+	 * @param msgResID 消息资源ID
 	 */
 	public static void show(Activity activity,int msgResID){
-		Toast.makeText(activity, msgResID, Toast.LENGTH_SHORT).show();
+		show(activity,activity.getResources().getString(msgResID));
+	}
+
+	/**
+	 * 以较长时间显示Toast消息
+	 * @param activity Activity
+	 * @param msgResID 消息资源ID
+	 */
+	public static void showL(Activity activity,int msgResID){
+		showL(activity,activity.getResources().getString(msgResID));
 	}
 	
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素) 
-	 * @param context
-	 * @param dpValue
-	 * @return
+	 * @param context 上下文，一般为Activity
+	 * @param dpValue dp数据值
+	 * @return px像素值
 	 */
     public static int dip2px(Context context, float dpValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  
@@ -243,9 +247,9 @@ public final class ActivityUtil {
   
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp 
-     * @param context
-     * @param pxValue
-     * @return
+     * @param context 上下文，一般为Activity
+     * @param pxValue px像素值
+     * @return dp数据值
      */
     public static int px2dip(Context context, float pxValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  

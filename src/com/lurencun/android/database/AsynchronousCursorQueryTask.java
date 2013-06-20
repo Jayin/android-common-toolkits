@@ -4,9 +4,9 @@ import android.database.Cursor;
 import android.widget.CursorAdapter;
 
 /**
- * 异步查询数据库
  * @author 桥下一粒砂 (chenyoca@gmail.com)
  * date   2013-4-7
+ * 异步查询数据库
  */
 public class AsynchronousCursorQueryTask extends AsynchronousQueryTask {
 	

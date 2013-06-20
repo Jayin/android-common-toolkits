@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
  * <li><b>date : </b>       2012-7-17 下午10:26:03</li>
  * </ul>
  */
+
+
 public class CharsetUtil {
 
 	public static final char[] CHINESE_FIRST_LETTER_TABLE = { 'a', 'b', 'c',

@@ -19,9 +19,9 @@ public class HolderViewFiller<T> {
 	private LayoutInflater mInflater;
 	
 	/** View创建器 **/
-	private ViewCreator<T> mCreator;
+	private ViewBuilderDelegate<T> mCreator;
 
-	public HolderViewFiller(LayoutInflater inflater, ViewCreator<T> creator) {
+	public HolderViewFiller(LayoutInflater inflater, ViewBuilderDelegate<T> creator) {
 		mInflater = inflater;
 		mCreator = creator;
 	}

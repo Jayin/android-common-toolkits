@@ -5,42 +5,36 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-7-10
- * @desc   : 实现HolderView模式的Adapter。
- * @param <T>
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date   : 2012-7-10
+ * 实现HolderView缓存方法的Adapter。
  */
 public class HolderAdapter<T> extends AbstractAdapter<T> {
 
 	/**
-	 * </br><b>description : </b>	创建对象
-	 * @param inflater
-	 * @param creator
+	 * @see AbstractAdapter#AbstractAdapter(android.view.LayoutInflater, ViewBuilderDelegate)
 	 */
-	public HolderAdapter(LayoutInflater inflater, ViewCreator<T> creator) {
+	public HolderAdapter(LayoutInflater inflater, ViewBuilderDelegate<T> creator) {
 		super(inflater, creator);
 	}
 
 	private static class ViewHolder{
 		public View view;
 	}
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// Holder View模式实现
+		ViewHolder holder;
 		if (convertView == null) {
-			ViewHolder holder = new ViewHolder();
-			convertView = creator.createView(layoutInflater, position,getItem(position));
+			holder = new ViewHolder();
+			convertView = viewBuilderDelegate.newView(layoutInflater);
 			holder.view = convertView;
 			convertView.setTag(holder);
 		} else {
-			ViewHolder holder = (ViewHolder) convertView.getTag();
-			//释放当前的View的数据
-			creator.releaseView(convertView,  getItem(position));
-			//将新数据更新到HodlerView中
-			creator.updateView(holder.view, position, getItem(position));
+			holder = (ViewHolder) convertView.getTag();
+			viewBuilderDelegate.releaseView(convertView, getItem(position));
 		}
+		viewBuilderDelegate.bindView(holder.view, position, getItem(position));
 		return convertView;
 	}
 }

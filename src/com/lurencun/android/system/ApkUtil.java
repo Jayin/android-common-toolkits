@@ -14,20 +14,19 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-8-11
- * @desc   : APK相关功能帮助器类
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-8-11
+ * APK相关功能帮助器类
  */
 public class ApkUtil {
 
 	/**
 	 * 判断APK包是否已经安装
-	 * @param context
-	 * @param packageName
-	 * @return
+	 * @param context 上下文，一般为Activity
+	 * @param packageName 包名
+	 * @return 包存在则返回true，否则返回false
 	 */
-	public static boolean exist(Context context, String packageName) {
+	public static boolean isPackageExists(Context context, String packageName) {
 		if (null == packageName || "".equals(packageName)) {
 			throw new IllegalArgumentException("Package name cannot be null or empty !");
 		}
@@ -42,8 +41,8 @@ public class ApkUtil {
 
 	/**
 	 * 安装指定APK文件
-	 * @param activity
-	 * @param apkFile
+	 * @param activity Activity
+	 * @param apkFile APK文件对象
 	 */
 	public static void install(Activity activity, File apkFile) {
 		Intent intent = new Intent();
@@ -54,10 +53,9 @@ public class ApkUtil {
 	}
 	
 	/**
-	 * 启动一个指定包名的应用
-	 * @param activity
-	 * @param packageName
-	 *
+	 * 启动一个指定包名的应用的默认Activity
+	 * @param activity Activity
+	 * @param packageName 包名
 	 */
 	public static void launch(Activity activity,String packageName){
 		Intent intent = activity.getPackageManager().getLaunchIntentForPackage(packageName);
@@ -66,9 +64,4 @@ public class ApkUtil {
 		}
 	}
 	
-	public static void cleanAppCache(Activity activity) throws IOException{
-		String path = activity.getDir(".", Context.MODE_PRIVATE).getAbsolutePath();
-		String dir = path.substring(0, path.lastIndexOf("/") + 1);
-		FileUtil.deleteDirectory(dir);
-	}
 }
