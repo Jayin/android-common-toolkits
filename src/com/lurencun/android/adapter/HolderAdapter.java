@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 /**
  * @author : 桥下一粒砂 chenyoca@gmail.com
- * date   : 2012-7-10
+ * date    : 2012-7-10
  * 实现HolderView缓存方法的Adapter。
  */
 public class HolderAdapter<T> extends AbstractAdapter<T> {

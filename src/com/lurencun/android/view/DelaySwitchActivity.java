@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 
 import com.lurencun.android.common.Params;
-import com.lurencun.android.system.ActivityUtil;
+import com.lurencun.android.system.ActivityUtility;
 
 /**
  * @author : 桥下一粒砂
@@ -47,7 +47,7 @@ public abstract class DelaySwitchActivity extends Activity {
 	}
 	
 	final protected void switchToNextView(){
-		ActivityUtil.switchTo(this, nextActivity, params);
+		ActivityUtility.switchTo(this, nextActivity, params);
 		cancelSwitchAction();
 		finish();
 	}

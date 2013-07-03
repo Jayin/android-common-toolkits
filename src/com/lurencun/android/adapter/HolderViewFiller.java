@@ -7,11 +7,9 @@ import android.widget.AbsListView;
 import android.widget.ListAdapter;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-7-14
- * @desc   : 可继承自AbsListView进行子项填充的工具类。主要用于ListView，GridView等填充。
- * @param <T>
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-7-14
+ * 可填充继承自AbsListView的列表型View的工具类。主要用于ListView，GridView等填充其子View。
  */
 public class HolderViewFiller<T> {
 
@@ -27,26 +25,24 @@ public class HolderViewFiller<T> {
 	}
 
 	/**
-	 * </br><b>description :</b>将数据更新到View中
-	 * </br><b>time :</b> 2012-7-18 下午7:41:55
-	 * @param view
-	 * @param data
+	 * 对目标View更新数据
+	 * @param targetView 目标View
+	 * @param data 更新的数据
 	 */
-	public void update(AbsListView view, List<T> data) {
-		HolderAdapter<T> holderAdapter = exportAdapter(view);
+	public void update(AbsListView targetView, List<T> data) {
+		HolderAdapter<T> holderAdapter = exportAdapter(targetView);
 		if (null != holderAdapter) {
 			holderAdapter.update(data);
 		}
 	}
 
 	/**
-	 * </br><b>description :</b>添加数据集 
-	 * </br><b>time :</b> 2012-7-18 下午8:16:38
-	 * @param view
-	 * @param set
+	 * 向目标View添加数据
+	 * @param targetView 目标View
+	 * @param set 数据
 	 */
-	public void add(AbsListView view, List<T> set) {
-		HolderAdapter<T> holderAdapter = exportAdapter(view);
+	public void add(AbsListView targetView, List<T> set) {
+		HolderAdapter<T> holderAdapter = exportAdapter(targetView);
 		if (null != holderAdapter) {
 			holderAdapter.add(set);
 		}

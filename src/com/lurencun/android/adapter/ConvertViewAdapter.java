@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 /**
  * @author : 桥下一粒砂 chenyoca@gmail.com
- * date   : 2012-9-13
+ * date    : 2012-9-13
  * 使用convertView作View缓存的Adapter实现。
  * Convert View的相关知识，可参考 http://www.cnblogs.com/over140/archive/2011/03/23/1991100.html
  */

@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 
 /**
  * @author : 桥下一粒砂 chenyoca@gmail.com
- * date   : 2012-9-13
+ * date    : 2012-9-13
  * 抽象Adapter类
  */
 public abstract class AbstractAdapter<T> extends BaseAdapter {

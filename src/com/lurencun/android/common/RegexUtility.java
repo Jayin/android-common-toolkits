@@ -3,11 +3,12 @@ package com.lurencun.android.common;
 import java.util.regex.Pattern;
 
 /**
- * @author : 桥下一粒砂 chenyoca@gmail.com
- * date    : 2012-10-23
- * 常正则表达式
+ * @author : 桥下一粒砂
+ * @email  : chenyoca@gmail.com
+ * @date   : 2012-10-23
+ * @desc   : 常正则表达式
  */
-public class CommonRegex {
+public class RegexUtility {
 
 	/** 常字符，包含标点*/
 	public static final String COMMON_CHAR = "^[\\w \\p{P}]+$";
@@ -63,7 +64,7 @@ public class CommonRegex {
      * @return					如果正则表达式匹配成功，返回true，否则返回false。
      */
     public static boolean matchEmptyLine(String line){
-        return null == line || matcherRegex(EMPTY_LINE, line);
+        return null == line ? true : matcherRegex(EMPTY_LINE, line);
     }
     
     /**
@@ -82,7 +83,7 @@ public class CommonRegex {
      * @return
      */
     public static boolean matchEmail(String email){
-    	return null == email && matcherRegex(EMAIL, email);
+    	return null == email ? false : matcherRegex(EMAIL, email);
     }
     
     /**
@@ -92,6 +93,6 @@ public class CommonRegex {
      * @return					如果正则表达式匹配成功，返回true，否则返回false。
      */
     public static boolean matchPersionName(String name){
-        return null == name && matcherRegex(PERSION_NAME, name);
+        return null == name ? false : matcherRegex(PERSION_NAME, name);
     }
 }

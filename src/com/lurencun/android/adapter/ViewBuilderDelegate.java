@@ -4,11 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-7-14
- * @desc   : 创建View和更新View的接口
- * @param <E>
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-7-14
+ * View 构建器代理接口
  */
 public interface ViewBuilderDelegate<E> {
 

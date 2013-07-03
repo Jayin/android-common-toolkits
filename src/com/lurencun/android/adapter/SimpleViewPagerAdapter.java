@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 /**
  * @author : 桥下一粒砂 chenyoca@gmail.com
- * date   : 2012-10-15
+ * date    : 2012-10-15
  * 为ViewPager提供的通用Adapter
  */
 public class SimpleViewPagerAdapter<T> extends PagerAdapter {
