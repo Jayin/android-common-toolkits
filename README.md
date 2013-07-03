@@ -169,7 +169,7 @@ android-common-tookit
 	
 	如果您觉得本开源项目对你有帮助，您可以对作者捐助 1 元以示支持。
 	
-	支付宝捐助地址： [桥下一粒砂](https://me.alipay.com/yoojiachen)
+支付宝捐助地址： [桥下一粒砂](https://me.alipay.com/yoojiachen)
 
 ## 开源协议 Apache License 2.0
 
