@@ -3,7 +3,7 @@ package com.lurencun.android.resource;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.lurencun.android.common.InputStreamUtil;
+import com.lurencun.android.common.InputStreamUtility;
 
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
@@ -60,6 +60,6 @@ public class AssetsReader {
 	 * @throws IOException
 	 */
 	public static String readRawAsString(Context c,int resId) throws NotFoundException, IOException{
-		return InputStreamUtil.toString(c.getResources().openRawResource(resId));
+		return InputStreamUtility.toString(c.getResources().openRawResource(resId));
 	}
 }

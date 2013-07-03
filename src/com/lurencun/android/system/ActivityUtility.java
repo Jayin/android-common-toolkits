@@ -149,7 +149,7 @@ public final class ActivityUtility {
 		Intent intent = new Intent(activity,target);
 		if( null != params ){
 			for(Params.NameValue item : params.nameValueArray){
-				IntentUtil.setValueToIntent(intent, item.name, item.value);
+				IntentUtility.setValueToIntent(intent, item.name, item.value);
 			}
 		}
 		switchTo(activity, intent);
@@ -166,7 +166,7 @@ public final class ActivityUtility {
 		Intent intent = new Intent(activity,targetActivity);
 		if( null != params ){
 			for(Params.NameValue item : params.nameValueArray){
-				IntentUtil.setValueToIntent(intent, item.name, item.value);
+				IntentUtility.setValueToIntent(intent, item.name, item.value);
 			}
 		}
 		activity.startActivityForResult(intent, requestCode);

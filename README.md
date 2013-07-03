@@ -7,29 +7,162 @@ android-common-tookit
 
 ### 使用
 
-	大部分是工具类，以静态方法方式调用。其中adapter包中的类是为各类Adapter应用场景设计。
+	大部分是工具类，以静态方法方式调用。详细见各个包的说明及示例。
 	
-## 使用范例
+## 工具包说明
 
 ### Adapter
 
-	adapter包设计了三类Adapter（继承自官方的Adapter）：CommonAdapter、CommonPagerAdapter、HolderAdapter。
-	CommonAdapter适用于创建例如主界面功能菜单等不需要Item更新的布局。CommonPagerAdaptert为PagerView而设计，提供强制刷新功能。
-	HolderAdapter适用于ListView等大量数据显示。其中HolderViewFiller是整合HolderAdapter的辅助工具类。
-	ViewCreator是以上Adapter的核心接口，它提供一个统一的创建View、更新View、回收View等操作的接口。
+	Android各个组件使用的Adapter都包含大量需要实现的接口。
+	本类包内的Adapter对这些接口进行简化，并将Adapter的View创建过程通过ViewBuilder代理接口转移到Adapter类外实现，实现组件逻辑与界面创建分离。
 	
+##### ConverViewAdapter
+
+	使用convertView作View缓存的Adapter实现。
+	Convert View的相关知识，可参考 http://www.cnblogs.com/over140/archive/2011/03/23/1991100.html
+
+##### HolderAdapter
+
+	实现HolderView缓存方法的Adapter。这个类并没完全实现Holder模式，只对顶级View进行Holder缓存。
+
+##### HolderViewFiller
+
+	快速填充GridView或者ListView的辅助类
+
+##### NoCachedAdapter
+
+	没有使用任务View缓存的Adapter。
+
+##### SimpleCursorAdapter
+
+	游标适配器
+
+-----
 
 ### Common
 
+	通用工具类
+
+##### InputStreamUtil
+
+	输入流转换工具。可将InputStream转换成Bitmap,BitmapDrawable,String,StringBuffer,Byte数组等。
+
+##### JSONAbility
+
+	可将Java Bean的各个属性输出成JSON格式字符串。
+
+##### RandomUtil
+
+	生成最大值范围的随机数，指定长度的随机字符串。
+
+##### ReflectUtility
+
+	反射工具类
+
+##### RegexUtil
+
+	一些常用正则表达式
+
+##### UnitUtil
+
+	数量单位生成
+
+##### UrlUtil
+
+	Url辅助
+
+##### ViewDoubleClick
+
+	View双击处理。
+
+### database
+
+	数据库辅助工具类
+
+##### AsynchronousCursorQueryTask
+
+	执行一个异步查询任务，查询完成后，对Adapter更换Cursor。
+
+##### AsynchronousCursorTreeQueryTask
+
+	执行一个异步查询任务，适用于树形控件，查询完成后，对Adapter更换Cursor。
+
+-----
 	
 ### Encrypt
+	
+	加密处理
 
+##### Base64
+
+	Base64 加密解密
+
+##### HashEncrypt
+
+	Hash类加密：MD5，SHA-1, SHA-256
+
+-----
 
 ### Resource
 
+-----
+
+### Fragment
+
+##### InnerFragment
+
+	继承自support v4的Fragment，扩展了View创建功能。
+
+###### FragmentUtility
+
+	隐藏指定Fragment
+
+-----
 
 ### System
-	
+
+##### ActivityUtility
+
+	使用最多的工具类，包含Activity常用设置方法。如全屏，去掉标题栏，显示Toast，隐藏/显示输入法，计算px与dp等方法。
+
+##### ApkUtility
+
+	Apk文件检测是否存在，安装指定APK文件
+
+##### DoubleClickExit
+
+	双击退出应用
+
+##### Exlog
+
+	调试必备！可以输入调试信息在哪一个类哪一行的辅助工具类。包括：取得当前代码所在方法名、输出调用方法链等方法。
+
+##### NetworkUtility
+
+	网络工具类
+
+##### PhoneUtility
+
+	电话
+
+-----
+
+### View
+
+##### DelaySwitchActivity
+
+	延时跳转Activity，用于启动界面。
+
+##### ViewController
+
+	就是ViewController
+
+##### ViewPagerScheduler
+
+	如果你需要类似JQuery slideshow等图片轮播组件，在Android上你可能会自己实现一个。
+	但是，ViewPager不就是一个现成的SlideShow组件么？只需要添加自动轮播功能即可。
+	那么，ViewPagerScheduler就可以为你自动轮播ViewPager啦！
+
 
 ## 开源协议 Apache License 2.0
 

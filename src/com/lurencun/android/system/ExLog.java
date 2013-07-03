@@ -1,30 +1,26 @@
 package com.lurencun.android.system;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 public class ExLog {
 
-	static Context context;
-	
 	static final String TAG = ExLog.class.getSimpleName();
-	
-	public static void init(Context c){
-		context = c;
-	}
-	
-	public static void v(String message){
-		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-	}
-	
+
+	/**
+	 * 输出调试信息(System.out)，并在调试输入信息中附带当前代码在哪个类哪一行的额外数据。
+	 * @param message 调试信息
+	 */
 	public static void l(String message){
 		StackTraceElement ele = Thread.currentThread().getStackTrace()[3];
 		int line = ele.getLineNumber();
 		String clazz = ele.getClassName();
 		System.out.println(":::: @"+clazz+" -> "+line+" :::: "+message);
 	}
-	
+
+	/**
+	 * 取得当前代码所在的方法名
+	 * @return 当前方法名
+	 */
 	public static String getCurrentMethodName(){
 		// 0 getThreadStackTrce
 		// 1 getStackTrace

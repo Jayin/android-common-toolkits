@@ -10,7 +10,7 @@ import android.net.wifi.WifiManager;
  * date   : 2012-11-1
  * 网络工具类
  */
-public class NetworkUtil {
+public class NetworkUtility {
 
 	/**
 	 * 返回网络是否可用。需要权限：

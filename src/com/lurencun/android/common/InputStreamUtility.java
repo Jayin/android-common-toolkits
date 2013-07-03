@@ -18,7 +18,7 @@ import android.graphics.drawable.BitmapDrawable;
  * @date   : 2012-10-23
  * @desc   : 对InputStream进行各类型数据的转换。转换类型包括Drawabel,Bitmap,String,byte[]等。
  */
-public class InputStreamUtil {
+public class InputStreamUtility {
 	
 	/**
 	 * 将InputStream流转换成BitmapDrawable。BitmapDrawable是Drawable的直接子类，可用于Drawable对象

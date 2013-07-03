@@ -15,7 +15,7 @@ public class UnitUtility {
 	/**
 	 * 默认计数系统值为1000
 	 */
-	public UnitUtility(){
+	public UnitUtility (){
 		this(1000);
 	}
 	
@@ -23,7 +23,7 @@ public class UnitUtility {
 	 * 指定计数系统。例如字节单位的计数系统值为1024
 	 * @param system
 	 */
-	public UnitUtility(int system){
+	public UnitUtility (int system){
 		this.system = system;
 	}
 	
