@@ -22,7 +22,8 @@ public class ViewPagerScheduler {
 	private Handler scheduleTurnHandler = new Handler(){
 		@Override
 		public void handleMessage (Message msg) {
-			if(MESSAGE != msg.what) return;
+			// 如果没有两条以上数据，则不需要轮播
+			if(MESSAGE != msg.what || count < 2) return;
 			int index = (viewPager.getCurrentItem()+1)%count;
 			viewPager.setCurrentItem(index, true);
 		}
