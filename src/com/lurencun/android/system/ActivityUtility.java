@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -66,6 +68,18 @@ public final class ActivityUtility {
 		    e1.printStackTrace();
 		    return 0;
 		} 
+	}
+
+	/**
+	 * 获取屏幕大小，单位px
+	 * @param activity Activity
+	 * @return 屏幕大小对象
+	 */
+	public static Point getScreenSize(Activity activity){
+		Display display = activity.getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		size.set(display.getWidth(),display.getHeight());
+		return size;
 	}
 	
 	/**
