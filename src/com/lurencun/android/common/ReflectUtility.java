@@ -8,37 +8,58 @@ import java.lang.reflect.Field;
  * 反射工具类
  */
 public class ReflectUtility {
-	
+
 	/**
-	 * 取得指定对象的指定成员名的值
-	 * @param object 指定的对象
-	 * @param fieldName
-	 * @return
-	 * @throws NoSuchFieldException 
-	 * @throws SecurityException 
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
-	 * @throws Exception
+	 * 获取指定字段名的字段对象
+	 * @param clazz 需要反射的类类型
+	 * @param fieldName 字段名
+	 * @return 字段对象。如果字段名不存在，返回null。
 	 */
-	public static Object getFieldValue(Object object,String fieldName) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		Field field = object.getClass().getDeclaredField(fieldName);
-		field.setAccessible(true);
-		return field.get(object);
+	public static Field getField(Class<?> clazz,String fieldName){
+		Field field = null;
+		try{
+			field = clazz.getDeclaredField(fieldName);
+		}catch(Exception e){
+			Class<?> superClazz = clazz.getSuperclass();
+			if(superClazz != null) return getField(superClazz,fieldName);
+		}
+		return field;
 	}
-	
+
 	/**
-	 * 对指定对象设置其指定成员变量的值
-	 * @param object
-	 * @param fieldName
-	 * @param value
+	 * 读取对象指定字段名的值
+	 * @param object 需要读取数据的对象
+	 * @param fieldName 字段名
+	 * @return 数据值
 	 * @throws SecurityException
 	 * @throws NoSuchFieldException
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	public static void setFieldValue(Object object,String fieldName,Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
-		Field field = object.getClass().getDeclaredField(fieldName);
-		field.setAccessible(true);
-		field.set(object, value);
+	public static Object getFieldValue(Object object,String fieldName) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Field field = getField(object.getClass(),fieldName);
+		if( field != null ){
+			field.setAccessible(true);
+			return field.get(object);
+		}
+		return null;
+	}
+
+	/**
+	 * 设置对象指定字段的值
+	 * @param object 需要设置数据的对象
+	 * @param fieldName 字段名
+	 * @param value 数据值
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static void setFieldValue(Object object,String fieldName,Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Field field = getField(object.getClass(),fieldName);
+		if(field != null){
+			field.setAccessible(true);
+			field.set(object, value);
+		}
 	}
 }

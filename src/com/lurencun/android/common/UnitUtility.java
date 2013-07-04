@@ -1,5 +1,10 @@
 package com.lurencun.android.common;
 
+/**
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date   : 2013-4-7
+ * 计量单位工具类
+ */
 public class UnitUtility {
 
 	private final int system;
@@ -20,8 +25,8 @@ public class UnitUtility {
 	}
 	
 	/**
-	 * 指定计数系统。例如字节单位的计数系统值为1024
-	 * @param system
+	 * 指定计数系统值。例如字节单位的计数系统值为1024
+	 * @param system 计数系统值
 	 */
 	public UnitUtility (int system){
 		this.system = system;
@@ -29,8 +34,8 @@ public class UnitUtility {
 	
 	/**
 	 * 数据与单位之间的连接符，默认为一个空格。
-	 * @param linkChar
-	 * @return
+	 * @param linkChar 连接符
+	 * @return 计量单位工具类对象本身
 	 */
 	public UnitUtility link(String linkChar){
 		this.link = linkChar;
@@ -40,7 +45,7 @@ public class UnitUtility {
 	/**
 	 * 结果的小数精度
 	 * @param accuracy
-	 * @return
+	 * @return 计量单位工具类对象本身
 	 */
 	public UnitUtility accuracy(int accuracy){
 		this.accuracy = accuracy;
@@ -51,7 +56,7 @@ public class UnitUtility {
 	 *  
 	 * @param baseUnit 基本单位。如果一个数没有达到最低计算数值，则用基本返回。例如，计算距离为千米（1000）,如果给定数据为123，则返回"123 米"。
 	 * @param formatUnit 计量单位。只计算一个量级时，设置此单位。例如，计算距离为千米，如果给定数据为 123456789，则返回 123456.79千米。
-	 * @return
+	 * @return 计量单位工具类对象本身
 	 */
 	public UnitUtility unit(String baseUnit,String formatUnit){
 		this.baseUnit = baseUnit;
@@ -62,8 +67,8 @@ public class UnitUtility {
 	/**
 	 * 分段计算。分段计算几个量级时，设置此参数，最基本单位开始。
 	 * e.g: unitUtility.sections("B","KB","MB","GB","TB")
-	 * @param sections
-	 * @return
+	 * @param sections 分段单位数组
+	 * @return 计量单位工具类对象本身
 	 */
 	public UnitUtility sections(String... sections){
 		this.sections = sections;
@@ -74,9 +79,13 @@ public class UnitUtility {
 		}
 		return this;
 	}
-	
+
+	/**
+	 * 将值数据转换成带单位的字符串
+	 * @param value 值数据
+	 * @return 带单位的字符串
+	 */
 	public String convert(double value){
-		
 		if(sections == null){
 			if(baseUnit == null || unit == null){
 				throw new IllegalArgumentException("Method 'base(String baseUnit)' and 'unit(String unit)' not call!");
@@ -104,6 +113,20 @@ public class UnitUtility {
 			}
 			return String.format(format.toString(), result);
 		}
+	}
+
+	static int logX(double base,double value){
+		double result = value;
+		int pow = 0;
+		for(;;){
+			result = result/base;
+			if(result<1){
+				break;
+			}else{
+				pow++;
+			}
+		}
+		return pow;
 	}
 	
 	StringBuffer format(double value,long base){
@@ -151,17 +174,5 @@ public class UnitUtility {
 //		}
 //	}
 	
-	static int logX(double base,double value){
-		double result = value;
-		int pow = 0;
-		for(;;){
-			result = result/base;
-			if(result<1){
-				break;
-			}else{
-				pow++;
-			}
-		}
-		return pow;
-	}
+
 }

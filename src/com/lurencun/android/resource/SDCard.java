@@ -5,14 +5,9 @@ import java.io.File;
 import android.os.Environment;
 
 /**
- * <ul>
- * <li><b>name : </b>		SDCard		</li>
- * <li><b>description :</b>	SD卡管理器				</li>
- * <li><b>author : </b>		桥下一粒砂			</li>
- * <li><b>e-mail : </b>		chenyoca@gmail.com	</li>
- * <li><b>weibo : </b>		@桥下一粒砂			</li>
- * <li><b>date : </b>		2012-9-13 下午3:55:02		</li>
- * </ul>
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-9-13
+ * SD卡工具类
  */
 public class SDCard {
 
@@ -23,9 +18,8 @@ public class SDCard {
 	private static String SDCARD_PATH;
 	
 	/**
-	 * <b>description :</b>		取得SD卡路径，以/结尾
-	 * </br><b>time :</b>		2012-9-13 下午3:58:55
-	 * @return
+	 * 取得SD卡路径，以/结尾
+	 * @return SD卡路径
 	 */
 	public static String getSDCardPath(){
 		if(!IS_MOUNTED) return null;

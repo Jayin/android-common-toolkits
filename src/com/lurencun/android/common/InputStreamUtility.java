@@ -13,17 +13,16 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-10-23
- * @desc   : 对InputStream进行各类型数据的转换。转换类型包括Drawabel,Bitmap,String,byte[]等。
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-10-23
+ * 对InputStream进行各类型数据的转换。转换类型包括Drawabel,Bitmap,String,byte[]等。
  */
 public class InputStreamUtility {
 	
 	/**
-	 * 将InputStream流转换成BitmapDrawable。BitmapDrawable是Drawable的直接子类，可用于Drawable对象
-	 * @param is
-	 * @return
+	 * 将InputStream流转换成BitmapDrawable。
+	 * @param is InputStream流
+	 * @return BitmapDrawable是Drawable的直接子类，可用于Drawable对象。
 	 * @throws IOException
 	 */
 	public static BitmapDrawable toBitmapDrawable(InputStream is) throws IOException{
@@ -44,15 +43,15 @@ public class InputStreamUtility {
 	}
 	
 	/**
-	 * <b>description :</b>		将InputStream转换成StringBuffer对象。
-	 * @param is 				InputStream对象
-	 * @return 				StringBuffer对象
+	 * 将InputStream转换成StringBuilder对象。
+	 * @param is InputStream对象
+	 * @return StringBuilder
 	 * @throws IOException 
 	 */
-	public static StringBuffer toStringBuffer(InputStream is) throws IOException{
+	public static StringBuilder toStringBuffer(InputStream is) throws IOException{
 	    if( null == is) return null;
 	    BufferedReader in = new BufferedReader(new InputStreamReader(is));
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		String line = null;
 		while ((line = in.readLine()) != null){
 		      buffer.append(line).append("\n");
@@ -62,9 +61,9 @@ public class InputStreamUtility {
 	}
 	
 	/**
-	 * <b>description :</b>	将InputStream转换成String对象。
-	 * @param is 					InputStream对象
-	 * @return 					String对象
+	 * 将InputStream转换成字符串。
+	 * @param is InputStream对象
+	 * @return 字符串
 	 * @throws IOException 
 	 */
 	public static String toString(InputStream is) throws IOException{
@@ -73,10 +72,10 @@ public class InputStreamUtility {
 	}
 	
 	/**
-	 * 转换为字符串
-	 * @param is
-	 * @param enc
-	 * @return
+	 * 将InputStream流转换为字符串，并指定编码类型。
+	 * @param is InputStream流
+	 * @param encoding 编码类型
+	 * @return 字符串
 	 * @throws IOException
 	 */
 	public static String convertToString(InputStream is,String encoding) throws IOException{
@@ -84,7 +83,7 @@ public class InputStreamUtility {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is,encoding));
 		char cache[] = new char[2*512];
 		int cacheSize = -1;
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		while((cacheSize = reader.read(cache)) != -1){
 			buffer.append(new String(cache, 0, cacheSize));
 			cacheSize = reader.read(cache);
@@ -94,14 +93,14 @@ public class InputStreamUtility {
 	}
 	
 	/**
-	 * <b>description :</b>		将InputStream转换成字节数组。
-	 * @param is 				InputStream对象
-	 * @return 				字节数组
+	 * 将InputStream转换成字节数组。
+	 * @param is InputStream对象
+	 * @return 字节数组
 	 * @throws IOException 
 	 */
 	public static byte[] toByteArray(InputStream is) throws IOException{
 	    if( null == is) return null;
-		byte[] cache = new byte[1 * 1024];
+		byte[] cache = new byte[2 * 1024];
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		for (int length; (length = is.read(cache)) != -1;) {
 		    buffer.write(cache, 0, length);
@@ -109,7 +108,13 @@ public class InputStreamUtility {
 		is.close();
 		return buffer.toByteArray();
 	}
-	
+
+	/**
+	 * 获取流编码类型
+	 * @param is InputStream流
+	 * @return 编码类型
+	 * @throws IOException
+	 */
 	public static String getStreamEncoding(InputStream is) throws IOException{
 		BufferedInputStream bis = new BufferedInputStream(is);
 		bis.mark(2);
@@ -131,10 +136,14 @@ public class InputStreamUtility {
 		return encoding;
 	}
 	
-	private final static int FIND_CHARSET_CACHE_SIZE = 4 * 1024;
-	private final static String CHARSET_REGX = "<meta.*charset=\"?([a-zA-Z0-9-_/]+)\"?";
-	
+	/**
+	 * 获取HTML文本流的编码类型
+	 * @param is HTML文本流
+	 * @return 编码类型
+	 * @throws IOException
+	 */
 	public static String getEncodingFromHTML(InputStream is) throws IOException{
+		final int FIND_CHARSET_CACHE_SIZE = 4 * 1024;
 		BufferedInputStream bis = new BufferedInputStream(is);
         bis.mark(FIND_CHARSET_CACHE_SIZE);
         byte[] cache = new byte[FIND_CHARSET_CACHE_SIZE];
@@ -142,13 +151,19 @@ public class InputStreamUtility {
         bis.reset();
         return getHtmlCharset(new String(cache));
 	}
-	
+
+	/**
+	 * 获取HTML文本字符集类型
+	 * @param content HTML内容
+	 * @return 字符集类型
+	 */
 	public static String getHtmlCharset(String content){
 		String encoding = null;
-		 Matcher m = Pattern.compile(CHARSET_REGX).matcher(content);
-		 if(m.find()){
-        	encoding = m.group(1);
-		 }
+		final String CHARSET_REGX = "<meta.*charset=\"?([a-zA-Z0-9-_/]+)\"?";
+		Matcher m = Pattern.compile(CHARSET_REGX).matcher(content);
+		if(m.find()){
+			encoding = m.group(1);
+		}
         return encoding;
 	}
 }

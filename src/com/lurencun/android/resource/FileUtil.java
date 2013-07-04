@@ -14,22 +14,19 @@ import java.util.Random;
 import android.util.Log;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-7-8
- * @desc   : 通用的文件处理类
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-7-8
+ * 通用的文件处理类
  */
 public class FileUtil {
 	
 	private static final String TAG = "FileUtil";
 	
 	/**
-	 * </br><b>title : </b>		把源文件复制到目标文件中。
-	 * </br><b>description :</b>把源文件复制到目标文件中。
-	 * </br><b>time :</b>		2012-7-8 下午5:03:38
-	 * @param source			源文件
-	 * @param dest				目标文件
-	 * @throws IOException		如果源文件不存在或者目标文件不可写入，抛出IO异常。
+	 * 复制文件。
+	 * @param source 源文件
+	 * @param dest 目标文件
+	 * @throws IOException 如果源文件不存在或者目标文件不可写入，抛出IO异常。
 	 */
 	public static void copy(File source, File dest) throws IOException {
 		FileInputStream fileIS = null;
@@ -63,37 +60,32 @@ public class FileUtil {
 		mbuf.clear();
 	}
 
-	
 	/**
-	 * </br><b>title : </b>		复制文件
-	 * </br><b>description :</b>复制文件
-	 * </br><b>time :</b>		2012-7-8 下午5:04:23
-	 * @param source			源文件路径
-	 * @param dest				目标文件路径
-	 * @throws IOException		如果源文件不存在或者目标文件不可写入，抛出IO异常。
+	 * 复制文件
+	 * @param source 源文件路径
+	 * @param dest 目标文件路径
+	 * @throws IOException 如果源文件不存在或者目标文件不可写入，抛出IO异常。
 	 */
 	public static void copy(String source, String dest) throws IOException {
 		copy(new File(source), new File(dest));
 	}
 	
 	/**
-	 * <b>description :</b>		保存一个输入流到指定路径中，保存完成后输入流将被关闭。
-	 * </br><b>time :</b>		2012-9-13 下午4:16:52
-	 * @param is
-	 * @param path
-	 * @throws IOException 
+	 * 保存一个输入流到指定路径中，保存完成后输入流将被关闭。
+	 * @param is 输入流
+	 * @param path 保存路径
+	 * @throws IOException
 	 */
 	public static void save(InputStream is,String path) throws IOException{
-		save(is,path,true);
+		save(is, path, true);
 	}
 	
 	/**
-	 * <b>description :</b>		保存一个输入流到指定路径中
-	 * </br><b>time :</b>		2012-9-13 下午4:20:09
-	 * @param is				输入流
-	 * @param path				路径
+	 * 保存一个输入流到指定路径中
+	 * @param is 输入流
+	 * @param path 路径
 	 * @param closeInputStream 是否关闭输入流
-	 * @throws IOException		
+	 * @throws IOException
 	 */
 	public static void save(InputStream is,String path,boolean closeInputStream) throws IOException{
 		FileOutputStream os = new FileOutputStream(createFile(path));
@@ -104,24 +96,30 @@ public class FileUtil {
 		os.close();
 		if(closeInputStream) is.close();
 	}
-	
+
+	/**
+	 * 创建文件及其路径
+	 * @param path 文件全路径
+	 * @return 文件对象
+	 * @throws IOException
+	 */
 	public static File createFile(String path) throws IOException{
-		File distFile = new File(path);
-		if(!distFile.exists()){
-			File dir = distFile.getParentFile();
+		File destinationFile = new File(path);
+		if(!destinationFile.exists()){
+			File dir = destinationFile.getParentFile();
 			if(dir != null && !dir.exists()){
 				dir.mkdirs();
 			}
-			distFile.createNewFile();
+			destinationFile.createNewFile();
 		}
-		return distFile;
+		return destinationFile;
 	}
 	
 	/**
-	 * <b>description :</b>		保存一个字节数组流到指定路径中
-	 * </br><b>time :</b>		2012-9-14 下午12:24:29
-	 * @param data
-	 * @param path
+	 * 保存一个字节数组到指定路径中
+	 * @param data 字节数组
+	 * @param path 保存的文件路径
+	 * @throws IOException
 	 */
 	public static void save(byte[] data,String path) throws IOException{
 		FileOutputStream os = new FileOutputStream(createFile(path));
@@ -131,10 +129,9 @@ public class FileUtil {
 	
 	/**
 	 * 移动文件
-	 * @param source
-	 * @param dest
+	 * @param source 源文件路径
+	 * @param dest 目标文件路径
 	 * @throws IOException
-	 *
 	 */
 	public static void moveFile(String source, String dest) throws IOException {
 		copy(source, dest);
@@ -152,34 +149,31 @@ public class FileUtil {
 
 	/**
 	 * 删除文件夹及其下内容
-	 * @param dirPath
-	 * @return
+	 * @param dirPath 文件夹路径
+	 * @return 是否删除成功
 	 * @throws IOException
 	 */
 	public static boolean deleteDirectory(String dirPath) throws IOException {
-		if(dirPath == null) return false;
-		return deleteDirectory(new File(dirPath));
+		return dirPath == null && deleteDirectory(new File(dirPath));
 	}
 	
 	/**
 	 * 删除文件夹及其下内容
-	 * @param dirFile
-	 * @return
+	 * @param dirFile 文件夹文件对象
+	 * @return 是否删除成功
 	 */
 	public static boolean deleteDirectory(File dirFile){
 		boolean result = false;
 		if(dirFile != null && dirFile.isDirectory()){
-			if(dirFile != null){
-				for (File file : dirFile.listFiles()) {
-					if (!file.delete()) {
-						file.deleteOnExit();
-					} 
+			for (File file : dirFile.listFiles()) {
+				if (!file.delete()) {
+					file.deleteOnExit();
 				}
-				if (dirFile.delete()) {
-					result = true;
-				} else {
-					dirFile.deleteOnExit();
-				}
+			}
+			if (dirFile.delete()) {
+				result = true;
+			} else {
+				dirFile.deleteOnExit();
 			}
 		}
 		return result;
@@ -187,8 +181,7 @@ public class FileUtil {
 	
 	/**
 	 * 删除文件夹及其下内容。如果文件夹被系统锁定或者文件夹不能被清空，将返回false。
-	 * @param directory
-	 * @param useOSNativeDelete 标识是否使用系统命令进行删除操作。
+	 * @param directory 文件夹目录
 	 * @return 文件夹删除成功则返回true，文件夹不存在则返回false。
 	 * @throws IOException 如果文件夹不能被删除，则抛出异常。
 	 *
@@ -225,11 +218,9 @@ public class FileUtil {
 	}
 
 	/**
-	 * </br><b>title : </b>		使用本地系统命令重命名一个文件。
-	 * </br><b>description :</b>使用本地系统命令重命名一个文件。
-	 * </br><b>time :</b>		2012-7-8 下午5:12:23
-	 * @param from				原文件名
-	 * @param to				新文件名
+	 * 使用本地系统命令重命名一个文件。
+	 * @param from 原文件
+	 * @param to 目标文件
 	 */
 	public static void rename(String from, String to) {
 		Process process = null;
@@ -246,6 +237,7 @@ public class FileUtil {
 				try {
 					Thread.sleep(250);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		} catch (Exception e) {
@@ -258,54 +250,27 @@ public class FileUtil {
 			}
 		}
 	}
-	
+
 	/**
-	 * <b>description :</b>		创建一个文件夹。
-	 * </br><b>time :</b>		2012-7-8 下午5:13:25
-	 * @param directory
-	 * @return					创建成功则返回true，否则返回false。
+	 * 创建一个文件夹。
+	 * @param directory 文件夹路径
+	 * @return 创建成功则返回true，否则返回false。
 	 * @throws IOException
 	 */
 	public static boolean makeDirectory(String directory) throws IOException {
 		return makeDirectory(directory, false);
 	}
-
-	/**
-	 * 提取文件名
-	 * @param path
-	 * @return
-	 */
-	public static String extractName(String path) {
-		if(path == null) return null;
-		boolean hasFileName = path.substring(path.length() - 5, path.length()).contains(".");
-		if (hasFileName) {
-			return path.substring(path.lastIndexOf(File.separator) + 1);
-		} else {
-			return null;
-		}
-	}
 	
 	/**
-	 * 导入文件后缀名
-	 * @param path
-	 * @return
-	 */
-	public static String extractSuffix(String path){
-		return path.substring(path.lastIndexOf(".") + 1);
-	}
-	
-	/**
-	 * </br><b>title : </b>		创建一个文件夹
-	 * </br><b>description :</b>如果<i>createParents</i> 被标记为true，则父级文件夹不存在将会被自动创建。
-	 * </br><b>time :</b>		2012-7-8 下午5:14:07
-	 * @param directory			需要被创建的文件夹
-	 * @param createParents		是否创建父级文件夹标识
-	 * @return					如果文件夹创建成功，返回true。如果文件夹已经存在，返回false。
-	 * @throws IOException		如果文件夹不能被创建，则抛出异常
+	 * 创建一个文件夹
+	 * @param directory 需要被创建的文件夹
+	 * @param createParents 是否创建父级文件夹
+	 * @return 如果文件夹创建成功，返回true。如果文件夹已经存在，返回false。
+	 * @throws IOException
 	 */
 	public static boolean makeDirectory(String directory, boolean createParents)
 			throws IOException {
-		boolean created = false;
+		boolean created;
 		File dir = new File(directory);
 		if (createParents) {
 			created = dir.mkdirs();
@@ -316,14 +281,12 @@ public class FileUtil {
 	}
 
 	/**
-	 * <b>description :</b>		计算文件夹大小
-	 * </br><b>time :</b>		2012-9-13 下午9:02:18
-	 * @param directory
-	 * @return
+	 * 计算文件夹大小
+	 * @param directory 文件夹对象
+	 * @return 文件夹大小
 	 * @throws IOException
 	 */
 	public static long getSize(File directory) throws IOException {
-		
 		File[] files = directory.listFiles();
 		long size = 0;
 		for (File f : files) {
@@ -339,15 +302,17 @@ public class FileUtil {
 	}
 
 	/**
-	 * Special method for capture of StdOut.
-	 * @return
+	 * 执行系统命令
+	 * @return 执行进程
 	 */
-	private final static Thread stdOut(final Process p) {
+	private static Thread stdOut(final Process p) {
 		final byte[] empty = new byte[128];
 		for (int b = 0; b < empty.length; b++) {
 			empty[b] = (byte) 0;
 		}
 		Thread std = new Thread() {
+
+			@Override
 			public void run() {
 				StringBuilder sb = new StringBuilder(1024);
 				byte[] buf = new byte[128];
@@ -369,7 +334,47 @@ public class FileUtil {
 		return std;
 	}
 
-	
+	/**
+	 * 提取文件名
+	 * @param path 路径
+	 * @return 文件名
+	 */
+	public static String extractName(String path) {
+		if(path == null) return null;
+		boolean hasFileName = path.substring(path.length() - 5, path.length()).contains(".");
+		if (hasFileName) {
+			return path.substring(path.lastIndexOf(File.separator) + 1);
+		} else {
+			return null;
+		}
+	}
+
+	private static final int min_leight = ".jpg".length();
+
+	/**
+	 * 获取文件名或者URL路径的后缀名。
+	 * e.g
+	 * http://www.foobar.com/logo.png 后缀名为 png,
+	 * foobar.jpg 后缀名为 jpg
+	 * @param pathOrName 路径或者文件名
+	 * @return 后缀名
+	 */
+	public static String getSuffix(String pathOrName){
+		if(pathOrName == null || !pathOrName.contains(".") || min_leight > pathOrName.length()) return null;
+		return pathOrName.substring(pathOrName.indexOf('.'));
+	}
+
+	/**
+	 * 获取路径或者文件名的Hash文件名。保留其后缀
+	 * @param pathOrName 路径或者文件名
+	 * @return Hash文件名
+	 */
+	public static String genHashFileName(String pathOrName){
+		int hash = pathOrName.hashCode();
+		String suffix = getSuffix(pathOrName);
+		return hash + (suffix == null ? "" : suffix);
+	}
+
 	/**
 	 * 生成一个文件名。类似 282818_00023 。这个名字由于当前秒数加随机数组成。
 	 * @return 生成的文件名

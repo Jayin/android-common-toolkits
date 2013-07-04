@@ -6,15 +6,13 @@ import java.util.TimerTask;
 import android.view.MotionEvent;
 
 /**
+ * @author : 桥下一粒砂 (chenyoca@gmail.com)
+ * date    : 2013-5-8
  * 在View上双击
- * 
- * @author 桥下一粒砂 (chenyoca@gmail.com)
- * @date   2013-5-8
  */
 public class ViewDoubleClick {
 	private int clickCount;
 	private long firstClickTime;
-	private int CLICK_DELAY = 300;
 	private final static int MOVE_OFFSET = 20;
 	private float mLastMotionY;
 	private float mLastMotionX;
@@ -38,6 +36,8 @@ public class ViewDoubleClick {
 
 			mLastMotionY = y;
 			mLastMotionX = x;
+
+			final int CLICK_DELAY = 300;
 
 			clickCount++;
 			if (clickCount == 1) {

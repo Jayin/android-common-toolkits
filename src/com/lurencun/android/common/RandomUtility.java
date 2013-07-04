@@ -3,14 +3,18 @@ package com.lurencun.android.common;
 import java.util.Random;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-11-14
- * @desc   : 随机数据生成工具
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date   : 2012-11-14
+ * 随机数据生成工具
  */
 public class RandomUtility {
-	
-	public static String rand(int length) {
+
+	/**
+	 * 生成指定长度的随机字符内容
+	 * @param length 长度
+	 * @return 字符内容
+	 */
+	public static String randomString(int length) {
         StringBuilder buffer = new StringBuilder();
         for (int t = 1; t < length; t++) {
             long time = System.currentTimeMillis() + t;
@@ -24,7 +28,12 @@ public class RandomUtility {
         }
         return buffer.toString();
     }
-	
+
+	/**
+	 * 生成指定[0,limit)范围的随机数
+	 * @param limit 最大值
+	 * @return 随机数
+	 */
 	public static int limitInt(int limit){
 		return Math.abs(new Random().nextInt(limit));
 	}

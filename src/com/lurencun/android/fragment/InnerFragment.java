@@ -16,8 +16,12 @@ public abstract class InnerFragment extends Fragment {
 	protected View contentView;
 	
 	private int layoutResourceId;
-	
-	public final void setLayoutParams(int layoutResId){
+
+	/**
+	 * 设置Fragment的布局文件资源ID
+	 * @param layoutResId 布局文件资源ID
+	 */
+	public final void setLayoutResId (int layoutResId){
 		Bundle args = new Bundle();
 	    args.putInt(KEY_LAYOUT_RES, layoutResId);
 	    setArguments(args);
@@ -34,7 +38,11 @@ public abstract class InnerFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		layoutResourceId = getLayoutResId();
 	}
-	
+
+	/**
+	 * 获取布局文件资源ID
+	 * @return 布局文件资源ID
+	 */
 	private int getLayoutResId(){
 		Bundle args = getArguments();
 		if( args != null ){

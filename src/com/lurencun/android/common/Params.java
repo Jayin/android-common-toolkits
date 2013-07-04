@@ -3,10 +3,9 @@ package com.lurencun.android.common;
 import java.util.ArrayList;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-11-22
- * @desc   : TODO
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-11-22
+ * NameValue键值对
  */
 public class Params {
 
@@ -52,7 +51,7 @@ public class Params {
 	}
 	
 	private Params appendToParamsArray(String name,Object value){
-		if(value != null && value != null && !"".equals(name) && !"".equals(value) ){
+		if(value != null && !"".equals(name) && !"".equals(value) ){
 			nameValueArray.add(new NameValue(name, value));
 		}
 		return this;
@@ -60,5 +59,5 @@ public class Params {
 	
 	public static Params build(){
 		return new Params();
-	};
+	}
 }
