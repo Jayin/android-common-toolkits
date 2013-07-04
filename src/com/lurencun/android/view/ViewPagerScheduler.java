@@ -45,17 +45,16 @@ public class ViewPagerScheduler {
 
 	/**
 	 * 重新开启（首次开启）定时轮播。
-	 * @param delay 开启后，间隔{delay}毫秒后执行第一次轮播动作。
 	 * @param period 轮播周期，单位毫秒。
 	 */
-	public void restart (int delay, int period){
+	public void restart (int period){
 		scheduleTimer = new Timer();
 		scheduleTimer.schedule(new TimerTask() {
 			@Override
 			public void run () {
 				scheduleTurnHandler.sendEmptyMessage(MESSAGE);
 			}
-		},delay,period);
+		},period,period);
 	}
 
 	/**
