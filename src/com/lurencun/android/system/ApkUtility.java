@@ -1,9 +1,6 @@
 package com.lurencun.android.system;
 
 import java.io.File;
-import java.io.IOException;
-
-import com.lurencun.android.resource.FileUtil;
 
 import android.app.Activity;
 import android.content.Context;

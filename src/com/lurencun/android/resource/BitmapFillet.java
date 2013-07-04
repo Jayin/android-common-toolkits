@@ -11,10 +11,9 @@ import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff.Mode;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-11-8
- * @desc   : 
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-11-8
+ * 图片切角工具
  */
 public class BitmapFillet {
 
@@ -27,11 +26,11 @@ public class BitmapFillet {
     /**
      * 
      * 指定图片的切边，对图片进行圆角处理
-     * @param type 具体参见：{@link BitmapFillet.ALL} , {@link BitmapFillet.TOP} , 
-     * 				{@link BitmapFillet.LEFT} , {@link BitmapFillet.RIGHT} , {@link BitmapFillet.BOTTOM}
+     * @param type 具体参见：{@link BitmapFillet#ALL} , {@link BitmapFillet#TOP} ,
+     * 				{@link BitmapFillet#LEFT} , {@link BitmapFillet#RIGHT} , {@link BitmapFillet#BOTTOM}
      * @param bitmap 需要被切圆角的图片
      * @param roundPx 要切的像素大小
-     * @return
+     * @return 处理后的图片对象
      *
      */
     public static Bitmap fillet(int type,Bitmap bitmap,int roundPx) {
@@ -65,8 +64,7 @@ public class BitmapFillet {
             paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN)); 
             //帖子图
             final Rect src = new Rect(0, 0, width, height);
-            final Rect dst = src;
-            canvas.drawBitmap(bitmap, src, dst, paint);   
+            canvas.drawBitmap(bitmap, src, src, paint);
             return paintingBoard;
         } catch (Exception exp) {        
             return bitmap;

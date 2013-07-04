@@ -67,10 +67,6 @@ android-common-tookit
 
 	数量单位生成
 
-##### UrlUtil
-
-	Url辅助
-
 ##### ViewDoubleClick
 
 	View双击处理。
@@ -104,6 +100,26 @@ android-common-tookit
 -----
 
 ### Resource
+
+##### BitmapFillet
+
+    图片圆角处理
+
+##### BitmapScale
+
+    图片缩放处理
+
+##### FileUtility
+
+    文件处理工具类。如复制、移动、创建文件，获取文件名，文件后缀等。
+
+##### ResourceReader
+
+    对Android资源的读取处理。如，将Assets内的图片文件读取成图片，文本内容等。
+
+##### SDCard
+
+    SDCard处理
 
 -----
 
