@@ -11,6 +11,8 @@ android-common-tookit
 	
 ## 工具包说明
 
+Library需要添加Android support v4 jar包。
+
 ### Adapter
 
 	Android各个组件使用的Adapter都包含大量需要实现的接口。
