@@ -20,6 +20,7 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 	private boolean mIsForceUpdateView = false;
 
 	private OnPagerItemClickListener<T> onPagerItemClickListener;
+    private OnPagerTitleChangeListener<T> onPagerTitleChangeListener;
 
 	/**
 	 * ViewPager页面被点击监听接口
@@ -35,6 +36,20 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 		 */
 		void onPagerItemClick (View pageView, int position, T data);
 	}
+
+    /**
+     * 切换Pager标题
+     * @param <T>
+     */
+    public interface OnPagerTitleChangeListener<T>{
+
+        /**
+         * 返回当前Pager的标题
+         * @param position 当前页面位置
+         * @param data 当前数据
+         */
+        String getPagerTitle(int position,T data);
+    }
 	
 	public SimpleViewPagerAdapter (LayoutInflater inf, ViewBuilderDelegate<T> delegate){
 		viewBuilderDelegate = delegate;
@@ -71,15 +86,17 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 		return dataSetReference == null ? 0 : dataSetReference.size();
 	}
 
-	/**
-	 * 添加ViewPager Item页面被点击的监听接口
-	 * @param onPagerItemClickListener 监听接口
-	 */
-	public void setOnPagerItemClickListener (OnPagerItemClickListener<T> onPagerItemClickListener) {
-		this.onPagerItemClickListener = onPagerItemClickListener;
-	}
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if(onPagerTitleChangeListener != null){
+            return onPagerTitleChangeListener.getPagerTitle(position,dataSetReference.get(position));
+        }else{
+            return super.getPageTitle(position);
+        }
 
-	/**
+    }
+
+    /**
 	 * 获取数据源中指定位置的数据对象
 	 * @param position 位置
 	 * @return 数据对象。如果数据源为null，则返回null。
@@ -123,4 +140,19 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 		return view == object;
 	}
 
+    /**
+     * 添加ViewPager Item页面被点击的监听接口
+     * @param onPagerItemClickListener 监听接口
+     */
+    public void setOnPagerItemClickListener (OnPagerItemClickListener<T> onPagerItemClickListener) {
+        this.onPagerItemClickListener = onPagerItemClickListener;
+    }
+
+    /**
+     * ViewpPager Title发生变化的监听接口
+     * @param onPagerTitleChangeListener 监听接口
+     */
+    public void setOnPagerTitleChangeListener(OnPagerTitleChangeListener<T> onPagerTitleChangeListener) {
+        this.onPagerTitleChangeListener = onPagerTitleChangeListener;
+    }
 }
