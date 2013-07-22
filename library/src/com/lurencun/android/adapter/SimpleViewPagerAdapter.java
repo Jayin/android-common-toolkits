@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 /**
  * @author : 桥下一粒砂 chenyoca@gmail.com
  * date    : 2012-10-15
- * 为ViewPager提供的通用Adapter
+ * 为ViewPager提供的通用Adapter。
+ * 注意：instantiateItem创建的View被设置了position做为Tag。
+ * 用于ViewPager.findViewWithTag(position)获取并更新单个Pager页面。
  */
 public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 
@@ -67,6 +69,7 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 	@Override
 	public Object instantiateItem(ViewGroup container,final int position) {
 		final View view = viewBuilderDelegate.newView(layoutInflater);
+        view.setTag(position);
 		final T data = dataSetReference.get(position);
 		viewBuilderDelegate.bindView(view, position, data);
 		if(onPagerItemClickListener != null){
