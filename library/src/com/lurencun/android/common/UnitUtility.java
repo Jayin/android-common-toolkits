@@ -88,7 +88,7 @@ public class UnitUtility {
 	public String convert(double value){
 		if(sections == null){
 			if(baseUnit == null || unit == null){
-				throw new IllegalArgumentException("Method 'base(String baseUnit)' and 'unit(String unit)' not call!");
+				throw new IllegalArgumentException("Method 'base(String baseUnit)' and 'unit(String unit)' not makeCall!");
 			}
 			StringBuffer format = format(value,system);
 			double result = value/system;

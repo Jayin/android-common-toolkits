@@ -64,7 +64,7 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
 	 */
 	public void add(List<T> set){
 	    if( null == dataSetReference ){
-	    	throw new NullPointerException("DataSet is NULL, call 'update' first !");
+	    	throw new NullPointerException("DataSet is NULL, makeCall 'update' first !");
 	    }
 	    dataSetReference.addAll(set);
 	}
