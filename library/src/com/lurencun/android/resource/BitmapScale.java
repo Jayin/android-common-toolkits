@@ -6,10 +6,9 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 
 /**
- * @author : 桥下一粒砂
- * @email  : chenyoca@gmail.com
- * @date   : 2012-7-18
- * @desc   : 图片工具。从Android 2.2 版本的BitmapUtil中扣出来的，兼容到1.6版本
+ * @author : 桥下一粒砂 chenyoca@gmail.com
+ * date    : 2012-7-18
+ * 图片工具。从Android 2.2 版本的BitmapUtil中扣出来的，兼容到1.6版本
  */
 public class BitmapScale {
 
@@ -21,29 +20,21 @@ public class BitmapScale {
 
 	/**
 	 * 指定长度宽度进行缩放
-	 * @param source
-	 * @param targetWidth
-	 * @param targetHeight
-	 * @return
+	 * @param source 源图片
+	 * @param targetWidth 目标宽度
+	 * @param targetHeight 目标高度
+	 * @return 处理后的图片
 	 */
 	public static Bitmap extract(Bitmap source, int targetWidth, int targetHeight) {
 		return extractThumbnail(source, targetWidth, targetHeight, Option.NONE);
 	}
 	
 	/**
-	 * <b>description :</b>		
-	 * </br><b>time :</b>		2012-8-10 下午10:30:27
-	 * @param source			源图
-	 * @param targetWidth		目标宽度
-	 * @param targetHeight		目标高度
-	 * @return
-	 */
-	/**
 	 * 按指定比例缩放
-	 * @param source
-	 * @param targetWidth
-	 * @param targetHeight
-	 * @return
+	 * @param source 源图片
+	 * @param targetWidth 目标宽度
+	 * @param targetHeight 目标高度
+	 * @return 处理后的图片
 	 */
 	public static Bitmap prorate(Bitmap source, int targetWidth, int targetHeight) {
 		if (source == null) return null;
@@ -70,8 +61,7 @@ public class BitmapScale {
 		}
 		Matrix matrix = new Matrix();
 		matrix.setScale(scale, scale);
-		Bitmap thumbnail = transform(matrix, source, targetWidth, targetHeight,Option.SCALE_UP | options);
-		return thumbnail;
+        return transform(matrix, source, targetWidth, targetHeight,Option.SCALE_UP | options);
 	}
 
 	private static Bitmap transform(Matrix scaler, Bitmap source,
