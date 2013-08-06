@@ -68,9 +68,9 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container,final int position) {
-		final View view = viewBuilderDelegate.newView(layoutInflater);
+        final T data = dataSetReference.get(position);
+		final View view = viewBuilderDelegate.newView(layoutInflater,data);
         view.setTag(position);
-		final T data = dataSetReference.get(position);
 		viewBuilderDelegate.bindView(view, position, data);
 		if(onPagerItemClickListener != null){
 			view.setOnClickListener(new View.OnClickListener(){

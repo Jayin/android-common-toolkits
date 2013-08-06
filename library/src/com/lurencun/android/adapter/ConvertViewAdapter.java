@@ -23,7 +23,7 @@ public class ConvertViewAdapter<T> extends AbstractAdapter<T> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		T data = dataSetReference.get(position);
 		if(null == convertView){
-			convertView = viewBuilderDelegate.newView(layoutInflater);
+			convertView = viewBuilderDelegate.newView(layoutInflater,data);
 		}
 		viewBuilderDelegate.bindView(convertView, position, data);
 		return convertView;

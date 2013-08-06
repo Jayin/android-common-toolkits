@@ -13,12 +13,13 @@ public interface ViewBuilderDelegate<E> {
 	/**
 	 * 创建View,HolderAdapter需要创建View时，会调用此方法创建View。
 	 * @param layoutInflater LayoutInflater，用于从XML布局文件中创建View。
+	 * @param data 数据。
 	 * @return 返回创建的新View。
 	 */
-    View newView (LayoutInflater layoutInflater);
+    View newView (LayoutInflater layoutInflater,E data);
 
 	/**
-	 * 当View被使用时，将数据绑定（更新）到View中。在{@link #newView(android.view.LayoutInflater)}方法执行后，
+	 * 当View被使用时，将数据绑定（更新）到View中。在{@link #newView(android.view.LayoutInflater,E data)}方法执行后，
 	 * 会自动调用此方法一次
 	 * @param view 需要进行数据绑定的View
 	 * @param position 当前数据在数据集中的位置

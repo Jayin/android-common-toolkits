@@ -25,16 +25,17 @@ public class HolderAdapter<T> extends AbstractAdapter<T> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
+        T data = getItem(position);
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = viewBuilderDelegate.newView(layoutInflater);
+			convertView = viewBuilderDelegate.newView(layoutInflater,data);
 			holder.view = convertView;
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
-			viewBuilderDelegate.releaseView(convertView, getItem(position));
+			viewBuilderDelegate.releaseView(convertView,data );
 		}
-		viewBuilderDelegate.bindView(holder.view, position, getItem(position));
+		viewBuilderDelegate.bindView(holder.view, position, data);
 		return convertView;
 	}
 }
