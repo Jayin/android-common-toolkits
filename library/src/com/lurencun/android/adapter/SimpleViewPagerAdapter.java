@@ -24,6 +24,8 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 	private OnPagerItemClickListener<T> onPagerItemClickListener;
     private OnPagerTitleChangeListener<T> onPagerTitleChangeListener;
 
+    private View currentPagerView;
+
 	/**
 	 * ViewPager页面被点击监听接口
 	 * @param <T>
@@ -57,8 +59,14 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
 		viewBuilderDelegate = delegate;
 		layoutInflater = inf;
 	}
-	
-	@Override
+
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        super.setPrimaryItem(container, position, object);
+        currentPagerView = (View)object;
+    }
+
+    @Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		View view = (View) object;
 		container.removeView(view);
@@ -97,6 +105,10 @@ public class SimpleViewPagerAdapter<T> extends PagerAdapter {
             return super.getPageTitle(position);
         }
 
+    }
+
+    public View getCurrentPagerView() {
+        return currentPagerView;
     }
 
     /**
