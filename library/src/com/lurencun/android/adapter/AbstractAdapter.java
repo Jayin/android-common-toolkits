@@ -1,9 +1,9 @@
 package com.lurencun.android.adapter;
 
-import java.util.List;
-
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
+
+import java.util.List;
 
 /**
  * @author : 桥下一粒砂 chenyoca@gmail.com
@@ -42,7 +42,15 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
 			dataSetReference.clear();
 		}
 	}
-	
+
+    /**
+     * 返回数据集引用
+     * @return 数据集引用
+     */
+    public List<T> getDataSet(){
+        return dataSetReference;
+    }
+
 	/**
 	 * 提交更新
 	 */
@@ -68,6 +76,17 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
 	    }
 	    dataSetReference.addAll(set);
 	}
+
+    /**
+     * 添加数据，向数据缓存中添加一个元素。
+     * @param item 元素
+     */
+    public void add(T item){
+        if( null == dataSetReference ){
+            throw new NullPointerException("DataSet is NULL, makeCall 'update' first !");
+        }
+        dataSetReference.add(item);
+    }
 
 	/**
 	 * 删除数据集中指定位置的数据。
