@@ -47,7 +47,9 @@ public abstract class DelaySwitchActivity extends Activity {
 	}
 	
 	final protected void switchToNextView(){
-		ActivityUtility.switchTo(this, nextActivity, params);
+        if(nextActivity!=null){
+            ActivityUtility.switchTo(this, nextActivity, params);
+        }
 		cancelSwitchAction();
 		finish();
 	}
