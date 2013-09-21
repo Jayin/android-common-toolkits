@@ -7,10 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
-import android.view.Display;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -208,13 +205,23 @@ public final class ActivityUtility {
 	 * @param message 消息内容
 	 */
 	public static void show(final Activity activity,final String message){
-		final String msg = msgFilter != null ? msgFilter.filter(message) : message;
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-			}
-		});
+		showAtCenter(activity,message,false);
 	}
+
+    public static void showE(final Activity activity,final String message){
+        showAtCenter(activity,message,true);
+    }
+
+    public static void showAtCenter(final Activity activity,final String message,final boolean center){
+        final String msg = msgFilter != null ? msgFilter.filter(message) : message;
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_SHORT);
+                if(center) toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+        });
+    }
 	
 	/**
 	 * 长时间显示Toast消息，并保证运行在UI线程中
