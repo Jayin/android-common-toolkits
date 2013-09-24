@@ -48,7 +48,7 @@ public class CropPhotoHelper {
             }
         }else{
             Bundle extras = data.getExtras();
-            Bitmap img = (Bitmap)extras.getParcelable("data");
+            Bitmap img = (Bitmap) (extras == null ? null : extras.get("data"));
             imagePath = saveCropImageToTempFile(img,imageOutputPath) ? imageOutputPath : null;
         }
         return imagePath;
@@ -58,10 +58,10 @@ public class CropPhotoHelper {
         boolean result = true;
         File cropFile = new File(imageOutputPath);
         try{
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(cropFile));
-            img.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
+            FileOutputStream os = new FileOutputStream (cropFile);
+            img.compress(Bitmap.CompressFormat.PNG, 100, os);
+            os.flush();
+            os.close();
         }catch(Exception exp){
             exp.printStackTrace();
             result = false;
