@@ -8,10 +8,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 /**
  * author : 桥下一粒砂 (chenyoca@gmail.com)
@@ -24,6 +26,34 @@ public class CropPhotoHelper {
 
     public CropPhotoHelper(Activity context) {
         this.context = context;
+    }
+
+    public void buildCropIntent(Intent intent ,
+                                Uri resourceUri,
+                                Uri outputUri,
+                                int aspectX, int aspectY,
+                                int outputX, int outputY,
+                                int requestCode){
+        if(resourceUri == null){
+            intent.setType("image/*");
+        }else{
+            intent.setDataAndType(resourceUri, "image/*");
+        }
+        intent.setDataAndType(resourceUri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", aspectX);
+        intent.putExtra("aspectY", aspectY);
+        intent.putExtra("outputX", outputX);
+        intent.putExtra("outputY", outputY);
+        intent.putExtra("scale", true);
+        boolean returnData = outputUri == null;
+        if(!returnData){
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+        }
+        intent.putExtra("return-data", returnData);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        context.startActivityForResult(intent, requestCode);
     }
 
     /**
@@ -47,14 +77,34 @@ public class CropPhotoHelper {
                 if(extraPath != null) imagePath = extraPath.substring(7);
             }
         }else{
-            Bundle extras = data.getExtras();
-            Bitmap img = (Bitmap) (extras == null ? null : extras.get("data"));
+            Bitmap img = data.getParcelableExtra("data");
+            if(img == null){
+                Bundle extras = data.getExtras();
+                img = (Bitmap) (extras == null ? null : extras.get("data"));
+            }
             imagePath = saveCropImageToTempFile(img,imageOutputPath) ? imageOutputPath : null;
         }
         return imagePath;
     }
 
+    public boolean hasImageCaptureBug() {
+        // list of known devices that have the bug
+        ArrayList<String> devices = new ArrayList<String>();
+        devices.add("android-devphone1/dream_devphone/dream");
+        devices.add("generic/sdk/generic");
+        devices.add("vodafone/vfpioneer/sapphire");
+        devices.add("tmobile/kila/dream");
+        devices.add("verizon/voles/sholes");
+        devices.add("google_ion/google_ion/sapphire");
+        return devices.contains(android.os.Build.BRAND + "/" + android.os.Build.PRODUCT + "/"
+                                        + android.os.Build.DEVICE);
+    }
+
     private boolean saveCropImageToTempFile(Bitmap img,String imageOutputPath){
+        if(img == null || imageOutputPath == null) {
+            Log.e("SAVE_CROP","Image(bitmap) or OutputPath is NULL !");
+            return false;
+        }
         boolean result = true;
         File cropFile = new File(imageOutputPath);
         try{
