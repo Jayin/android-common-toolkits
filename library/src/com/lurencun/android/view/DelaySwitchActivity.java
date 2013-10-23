@@ -10,7 +10,7 @@ import com.lurencun.android.system.ActivityUtility;
  * @author : 桥下一粒砂
  * @email  : chenyoca@gmail.com
  * @date   : 2012-12-19
- * @desc   : TODO
+ * @desc   : 延时一定时间后，自动跳转到其它Activity
  */
 public abstract class DelaySwitchActivity extends Activity {
 
@@ -29,15 +29,27 @@ public abstract class DelaySwitchActivity extends Activity {
 		};
 		switchHandler = new Handler();
 	}
-	
+
+    /**
+     * 设置延时时间
+     * @param delayMillis 延时时间，单位：ms
+     */
 	final protected void setSplashDelay(int delayMillis){
 		splashDelay = delayMillis;
 	}
-	
+
+    /**
+     * 跳转目标的Activity
+     * @param target
+     */
 	final protected void setNextActivity(Class<? extends Activity> target){
 		nextActivity = target;
 	}
-	
+
+    /**
+     * 跳转时Intent带的参数
+     * @param params
+     */
 	final protected void setParams(Params params){
 		this.params = params;
 	}
